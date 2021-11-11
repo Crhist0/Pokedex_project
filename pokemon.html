@@ -1,183 +1,201 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pokedex</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
     <style>
-        #pokedexParagrafos {
-            display: flex;
-            flex-direction: column;
-            margin-top: -15px;
-        }
+      #pokedexParagrafos {
+        display: flex;
+        flex-direction: column;
+        margin-top: -15px;
+      }
+      body {
+        background-color: black;
+      }
+      p {
+        margin-bottom: 8px;
+        text-align: center;
+        color: white;
+        font-weight: bold;
+      }
 
-        p {
-            margin-bottom: 8px;
-            text-align: center;
-        }
-
-        .header {
-            margin-top: 3vh;
-        }
+      .header {
+        margin-top: 3vh;
+      }
+      .pokedex {
+        width: 30%;
+      }
     </style>
-</head>
+  </head>
 
-<body>
-
-    <div class="container ">
-        <div class="row ">
-            <div class="header"></div>
-        </div>
-        <div class="row ">
-            <div class="body mt-5 d-flex flex-column align-items-center">
-                <h1 class="mb-3">Pokedex</h1>
-                <p class="mb-3">Insira o index do pokemon para exibir suas informações na pokedex.</p>
-                <form>
-                    <div class="mb-3 d-flex">
-                        <input type="text" class="form-control" placeholder="index do pokemon..." id="formsDoId">
-                        <button type="button" class="btn btn-dark ms-1" id="pkmnSubmit" onclick="changeHtml()"
-                            onm>Buscar</button>
-                    </div>
-
-                </form>
-
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="header"></div>
+      </div>
+      <div class="row">
+        <div class="body mt-5 d-flex flex-column align-items-center">
+          <img class="pokedex" src="./img/pokedex.png" alt="RocketTeam" />
+          <p class="mb-3">Insira o index do pokemon para exibir suas informações na pokedex.</p>
+          <form>
+            <div class="mb-3 d-flex">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="index do pokemon..."
+                id="formsDoId"
+              />
+              <button
+                type="button"
+                class="btn btn-outline-primary ms-1"
+                id="pkmnSubmit"
+                onclick="changeHtml()"
+                onm
+              >
+                Buscar
+              </button>
             </div>
+          </form>
         </div>
-        <div class="row">
-            <div class="content body d-flex flex-column align-items-center" id="content">
-                <p style="display: none;">pokemon vai aqui</p>
-            </div>
+      </div>
+      <div class="row">
+        <div class="content body d-flex flex-column align-items-center" id="content">
+          <p style="display: none">pokemon vai aqui</p>
         </div>
-        <div class="row" id="audio">
-        </div>
+      </div>
+      <div class="row" id="audio"></div>
     </div>
 
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
-    </script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+      crossorigin="anonymous"
+    ></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
-        // function autoPlay() {
-        //     document.getElementById("audio").innerHTML =
-        //         `<audio src="./bg.mp3" preload="auto" autoplay loop>
-        //         <p>If you are reading this, it is because your browser does not support the audio element.</p>
-        //         </audio>`
-        // }
-        // autoPlay()
-        // nao funcionou por nada nesse mundo
+      // function autoPlay() {
+      //     document.getElementById("audio").innerHTML =
+      //         `<audio src="./bg.mp3" preload="auto" autoplay loop>
+      //         <p>If you are reading this, it is because your browser does not support the audio element.</p>
+      //         </audio>`
+      // }
+      // autoPlay()
+      // nao funcionou por nada nesse mundo
 
-        function capitalizeFirstLetter(string) {
-            return string[0].toUpperCase() + string.slice(1);
-        }
-        document.getElementById(sprites).onmouseover = () => {
-            document.getElementById(sprites).setAttribute('src', pokemon.sprites.back_default)
-        }
+      function capitalizeFirstLetter(string) {
+        return string[0].toUpperCase() + string.slice(1);
+      }
+      document.getElementById(sprites).onmouseover = () => {
+        document.getElementById(sprites).setAttribute("src", pokemon.sprites.back_default);
+      };
 
-        function changeHtml() {
-            let index = document.getElementById("formsDoId").value
-            console.log(index);
-            axios.get(`https://pokeapi.co/api/v2/pokemon/${index}`).then((res) => {
-                console.log(res.data.name);
-                let pokemon = res.data;
-                let content = document.querySelector("#content");
-                let tipos = []
-                let localidades = []
-                for (const index in pokemon.types) {
-                    tipos.push(capitalizeFirstLetter(pokemon.types[index].type.name))
-                }
+      function changeHtml() {
+        let index = document.getElementById("formsDoId").value;
+        console.log(index);
+        axios.get(`https://pokeapi.co/api/v2/pokemon/${index}`).then((res) => {
+          console.log(res.data.name);
+          let pokemon = res.data;
+          let content = document.querySelector("#content");
+          let tipos = [];
+          let localidades = [];
+          for (const index in pokemon.types) {
+            tipos.push(capitalizeFirstLetter(pokemon.types[index].type.name));
+          }
 
-                axios.get(`https://pokeapi.co/api/v2/pokemon-species/${index}`).then((res) => {
-                    let habitat = res.data.habitat ? res.data.habitat.name : `Não há registros.`
+          axios.get(`https://pokeapi.co/api/v2/pokemon-species/${index}`).then((res) => {
+            let habitat = res.data.habitat ? res.data.habitat.name : `Não há registros.`;
 
-                    let flavors = res.data.flavor_text_entries
-                    let flavor = ""
-                    for (const Flavor of flavors) {
-                        if (Flavor.language.name == "en") {
-                            flavor = Flavor.flavor_text
-                            break
-                        }
-                        // pegar o primeiro em ingles
-                    }
+            let flavors = res.data.flavor_text_entries;
+            let flavor = "";
+            for (const Flavor of flavors) {
+              if (Flavor.language.name == "en") {
+                flavor = Flavor.flavor_text;
+                break;
+              }
+              // pegar o primeiro em ingles
+            }
 
-                    let genera = res.data.genera
-                    let genero = ""
-                    for (const gender of genera) {
-                        if (gender.language.name == "en") {
-                            genero = gender.genus
-                            break
-                        }
-                    }
+            let genera = res.data.genera;
+            let genero = "";
+            for (const gender of genera) {
+              if (gender.language.name == "en") {
+                genero = gender.genus;
+                break;
+              }
+            }
 
+            axios.get(`https://pokeapi.co/api/v2/pokemon/${index}/encounters`).then((res) => {
+              let local = res.data;
+              console.log(local);
+              for (const index in local) {
+                let cidade = Array.from(capitalizeFirstLetter(local[index].location_area.name));
+                cidade.splice(cidade.length - 5, 5); // pra tirar o "-area"
+                localidades.push(cidade.join(""));
+              }
 
-
-                    axios.get(`https://pokeapi.co/api/v2/pokemon/${index}/encounters`).then((res) => {
-                        let local = res.data
-                        console.log(local);
-                        for (const index in local) {
-                            let cidade = Array.from(capitalizeFirstLetter(local[index]
-                                .location_area.name))
-                            cidade.splice(cidade.length - 5, 5) // pra tirar o "-area"
-                            localidades.push(cidade.join(""))
-                        }
-
-
-                        content.innerHTML = `
+              content.innerHTML = `
                 <div class="row" id="pokedexSprite"  onmouseover="changeSprite()" onmouseout="changeSpriteBack()">
-                    <img id="spritesFront" style="height:200px; display:block" src="${pokemon.sprites.front_default}" >
-                    <img id="spritesBack" style="height:200px; display:none" src="${pokemon.sprites.back_default}" >
+                    <img id="spritesFront" style="height:200px; display:block" src="${
+                      pokemon.sprites.front_default
+                    }" >
+                    <img id="spritesBack" style="height:200px; display:none" src="${
+                      pokemon.sprites.back_default
+                    }" >
                 </div>
                 <div class="row d-flex justify-content-center" id="pokedexParagrafos">
                     <p> Index: ${pokemon.id}</p>
                     <p> Nome: ${capitalizeFirstLetter(pokemon.name)} </p>
                     <p> Genero: ${genero}</p>
-                    <p> Habitat: ${habitat }</p>
+                    <p> Habitat: ${habitat}</p>
                     <p> Tipo: ${tipos.join(", ")} </p>
-                    <p> Peso: ${(pokemon.weight/10).toFixed(1)} kg </p>
-                    <p> Altura: ${(pokemon.height/10).toFixed(1)} m </p>
+                    <p> Peso: ${(pokemon.weight / 10).toFixed(1)} kg </p>
+                    <p> Altura: ${(pokemon.height / 10).toFixed(1)} m </p>
                     <p> Shiny: <input class="form-check-input ms-3" type="checkbox" value="" id="shinyCheckbox" onchange="changeSpriteShiny()"> </p>
                     <p style="margin-top:16px; margin-bottom: 16px"> Detalhes: ${flavor} </p>
-                    <p> Localização: ${localidades.join(", ") ? localidades.join(", ") : `Não há registros.` } </p>
+                    <p> Localização: ${
+                      localidades.join(", ") ? localidades.join(", ") : `Não há registros.`
+                    } </p>
                 </div>
                     `;
+            });
+          });
+        });
+      }
 
-                    })
-                })
-            })
-        }
+      function changeSprite() {
+        document.getElementById("spritesBack").style.display = "block";
+        document.getElementById("spritesFront").style.display = "none";
+      }
 
-        function changeSprite() {
-            document.getElementById("spritesBack").style.display = "block"
-            document.getElementById("spritesFront").style.display = "none"
-        }
+      function changeSpriteBack() {
+        document.getElementById("spritesBack").style.display = "none";
+        document.getElementById("spritesFront").style.display = "block";
+      }
 
-        function changeSpriteBack() {
-            document.getElementById("spritesBack").style.display = "none"
-            document.getElementById("spritesFront").style.display = "block"
+      function changeSpriteShiny() {
+        let index = document.getElementById("formsDoId").value;
+        if (document.getElementById("shinyCheckbox").checked) {
+          axios.get(`https://pokeapi.co/api/v2/pokemon/${index}`).then((res) => {
+            let pokemon = res.data;
+            document.getElementById("spritesFront").src = `${pokemon.sprites.front_shiny}`;
+            document.getElementById("spritesBack").src = `${pokemon.sprites.back_shiny}`;
+          });
+        } else {
+          axios.get(`https://pokeapi.co/api/v2/pokemon/${index}`).then((res) => {
+            let pokemon = res.data;
+            document.getElementById("spritesFront").src = `${pokemon.sprites.front_default}`;
+            document.getElementById("spritesBack").src = `${pokemon.sprites.back_default}`;
+          });
         }
-
-        function changeSpriteShiny() {
-            let index = document.getElementById("formsDoId").value
-            if (document.getElementById("shinyCheckbox").checked) {
-                axios.get(`https://pokeapi.co/api/v2/pokemon/${index}`).then((res) => {
-                    let pokemon = res.data;
-                    document.getElementById("spritesFront").src = `${pokemon.sprites.front_shiny}`
-                    document.getElementById("spritesBack").src = `${pokemon.sprites.back_shiny}`
-                })
-            } else {
-                axios.get(`https://pokeapi.co/api/v2/pokemon/${index}`).then((res) => {
-                    let pokemon = res.data;
-                    document.getElementById("spritesFront").src = `${pokemon.sprites.front_default}`
-                    document.getElementById("spritesBack").src = `${pokemon.sprites.back_default}`
-                })
-            }
-        }
+      }
     </script>
-
-</body>
-
+  </body>
 </html>
