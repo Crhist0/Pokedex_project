@@ -1,0 +1,72 @@
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+body {
+  background-color: black;
+  height: 100vh;
+}
+
+.pokedex {
+  width: 30%;
+}
+.person {
+  width: 12rem;
+}
+
+#intro,
+#enter {
+  height: 90vh;
+  width: 100vw;
+  padding-top: 25px;
+}
+
+#intro {
+  display: block;
+  opacity: 100;
+  transition: opacity 20s ease-out 10s;
+}
+#enter {
+  display: none;
+  opacity: 0;
+  transition: opacity 20s ease-in 10s;
+  align-items: center;
+}
+
+#title {
+  position: absolute;
+  top: 150px;
+}
+
+#rocket {
+  position: absolute;
+  top: 2%;
+  left: 22%;
+}
+#ash {
+  position: absolute;
+  bottom: 2%;
+  right: 22%;
+}
+#title2 {
+  position: absolute;
+  top: 8%;
+}
+
+#rocket2 {
+  position: absolute;
+  top: 2%;
+  left: 4%;
+}
+#ash2 {
+  position: absolute;
+  bottom: 2%;
+  right: 4%;
+}
+
+#start {
+  position: absolute;
+  bottom: 40%;
+  left: 45%;
+}
